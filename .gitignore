@@ -1,0 +1,142 @@
+# CMakeLists.txt.user
+# CMakeCache.txt
+# CMakeFiles
+# CMakeScripts
+# Makefile
+# cmake_install.cmake
+# install_manifest.txt
+# compile_commands.json
+# CTestTestfile.cmake
+# _deps
+# **/.DS_Store
+
+# # It's nice to have the Builds folder exist, to remind us where it is
+# Builds/*
+# !Builds/.gitkeep
+
+# # This should never exist
+# Install/*
+
+# # Running CTest makes a bunch o junk
+# Testing
+
+# # IDE config
+# .idea
+
+# # clion cmake builds
+# cmake-build-debug
+# cmake-build-release
+# cmake-build-relwithdebinfo
+# packaging/Output/*
+
+############################################################
+#— Operating System & Editor cruft
+############################################################
+*.DS_Store
+Thumbs.db
+
+## Editor directories
+.vscode/
+.idea/
+
+############################################################
+#— Visual Studio & CMake-in-VS build folders (official template)
+############################################################
+
+.vs/
+# Optional: Visual Studio CMake settings. Uncomment only if
+# you want to ignore per-user overrides.
+# CMakeSettings.json
+
+# MSVC output directories
+Debug/
+DebugPublic/
+Release/
+x64/
+x86/
+ARM/
+ARM64/
+[Ww][Ii][Nn]32/
+ipch/
+*.VC.db
+*.VC.opendb
+*.suo
+*.ipdb
+*.iobj
+
+############################################################
+#— CMake build & Ninja or other out-of-source output
+############################################################
+
+# Matches Pamplejuce's default build-layout unless you changed it
+build/
+Builds/
+out/
+CMakeFiles/
+CMakeScripts/
+cmake_build*/
+CMakeCache.txt
+cmake_install.cmake
+install_manifest.txt
+Testing/
+compile_commands.json
+Testing.Tile/   # ctest temp dir (not always present)
+*.ninja_deps
+*.ninja_log
+build.ninja
+
+############################################################
+#— Compiler / linker/object artefacts
+############################################################
+
+*.obj
+*.exe
+*.dll
+*.lib
+*.exp
+*.pdb
+*.ilk
+*.log
+*.tlog/
+*.db
+*.db‑shm
+*.db‑wal
+
+############################################################
+#— JUCE / Pamplejuce plugin-generated artefacts (binaries, bundles)
+############################################################
+
+*_artefacts/
+build/**/VST3/
+build/**/Standalone/
+build/**/CLAP/
+*.vst3
+*.au
+*.aupreset
+*.clap
+
+# JUCE-generated code (binary data wrapper)
+JuceLibraryCode/
+version/
+![l]*Juicer*
+
+############################################################
+#— Melatonin Inspector/Juce CLI/CMake secondary files
+############################################################
+
+*.cmake.user
+*.cmake.user.template
+cpb-scratch/  # Catch2Bench scratch dir (rare)
+
+############################################################
+#— Packaging or local installer files (optional)
+############################################################
+
+/packaging/Output/
+/packaging/*.deb
+/*.zip
+/*.dmg
+#. (Don’t ignore YAML if you want to keep it!)
+
+#Secret files
+secrets/

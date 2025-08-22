@@ -1,0 +1,48 @@
+┌──────────────────────────────────────────────────────────────────────────┐
+│                   🌀 WIRKK DISTORTION BUILD CHEAT-SHEET 🌀              │
+│       (Terminal-based workflow — no Visual Studio IDE required)          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+A polished terminal-driven pipeline for building **🎛 Standalone** and **VST3, CLAP, AUv3** plugin formats using CMake and Git submodules.
+
+
+# First-time only: pulls JUCE, modules, and melatonin_inspector
+git submodule update --init --recursive
+
+# Once-off configure
+cmake -B Builds
+
+# Every build
+cmake --build Builds --config Release
+
+# Fast plugin only iteration
+cmake --build Builds --config Debug --target WirkkDistortion_Standalone
+
+# Dissect build process
+cmake --build Builds --config Release --target WirkkDistortion_VST3
+cmake --build Builds --config Release --target WirkkDistortion_CLAP_STANDALONE
+
+# Run tests
+cmake --build Builds --config Release --target RUN_TESTS
+
+
+Where each build artifact lands:
+
+WirkkDistortionPamplejuce/
+└── Builds/
+    ├── Release/
+    │   ├── Assets.lib
+    │   ├── melatonin_inspector.lib
+    │   ├── SharedCode.lib (from your main plugin project)
+    │   ├── clap_juce_extensions.lib
+    │   ├── exe helpers: e.g. juce VST3 helper .exe
+    │   └── Wirkk Distortion.exe (Standalone binary if built)
+    └── WirkkDistortion_artefacts/
+        └── Release/
+            ├── Standalone/
+            │   └── Wirkk Distortion.exe
+            ├── VST3/
+            │   └── Wirkk Distortion.vst3/
+            │       └── Contents/x86_64-win/... (inside VST3 bundle)
+            └── CLAP/
+                └── Wirkk Distortion.clap
