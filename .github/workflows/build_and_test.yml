@@ -271,6 +271,18 @@ jobs:
           iscc "packaging\installer.iss"
           mv "packaging/Output/${{ env.ARTIFACT_NAME }}.exe" "${{ env.ARTIFACTS_PATH }}/"
 
+      - name: Zip bundles (Windows)
+        if: ${{ matrix.name == 'Windows' }}
+        working-directory: ${{ env.ARTIFACTS_PATH }}
+        run: |
+          set -e
+          zipname="${{ env.ARTIFACT_NAME }}-windows-bundles.zip"
+          rm -f "$zipname"
+          [ -d "VST3/${{ env.PRODUCT_NAME }}.vst3" ] && 7z a -tzip "$zipname" "VST3/${{ env.PRODUCT_NAME }}.vst3" || true
+          [ -f "Standalone/${{ env.PRODUCT_NAME }}.exe" ] && 7z a -tzip "$zipname" "Standalone/${{ env.PRODUCT_NAME }}.exe" || true
+          [ -f "CLAP/${{ env.PRODUCT_NAME }}.clap" ] && 7z a -tzip "$zipname" "CLAP/${{ env.PRODUCT_NAME }}.clap" || true
+          echo "Created ${PWD}/$zipname"
+
       # - name: Codesign with Azure Trusted Signing
       #   if: ${{ matrix.name == 'Windows' }}
       #   uses: azure/trusted-signing-action@v0.5.1
@@ -303,6 +315,14 @@ jobs:
         with:
           name: ${{ env.ARTIFACT_NAME }}.exe
           path: "${{ env.ARTIFACTS_PATH }}/${{ env.ARTIFACT_NAME }}.exe"
+
+      - name: Upload Zip (Windows)
+        if: ${{ matrix.name == 'Windows' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}-windows-bundles.zip
+          path: "${{ env.ARTIFACTS_PATH }}/${{ env.ARTIFACT_NAME }}-windows-bundles.zip"
+          if-no-files-found: error
 
       - name: Upload Zip (Linux)
         if: ${{ matrix.name == 'Linux' }}
